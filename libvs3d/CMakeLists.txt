@@ -1,4 +1,4 @@
-project(libvs3d)
+project(libvs3d LANGUAGES C)
 
 set(LIBVS3D_SOURCES
     src/vs3d.c)
