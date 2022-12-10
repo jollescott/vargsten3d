@@ -1,13 +1,10 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-
-#include "vs3d.h"
+#include "wl6.h"
 
 FILE* openWl6(char* execPathArg, char* wl6FileArg)
 {
-    char execPath[strlen(execPathArg)];
-    char wl6Name[strlen(wl6FileArg)];
+    char* execPath = malloc(strlen(execPathArg));
+    char* wl6Name = malloc(strlen(wl6FileArg));
 
     strcpy(execPath, execPathArg);
     strcpy(wl6Name, wl6FileArg);
@@ -23,6 +20,9 @@ FILE* openWl6(char* execPathArg, char* wl6FileArg)
     strcat(wl6Path, wl6Name);
 
     printf("Decompressing %s ...\n", wl6Name);
+
+    free(execPath);
+    free(wl6Name);
 
     FILE* wl6File = fopen(wl6Path, "rb");
 
@@ -44,34 +44,4 @@ char* readWl6(FILE* wl6File, long* wl6Size) {
     *wl6Size = size;
 
     return buffer;
-}
-
-int main(int argc, char* argv[])
-{
-    if(argc < 2) {
-        printf("Expected two arguments, received %d", argc);
-        return EXIT_FAILURE;
-    }
-
-    char* execPathArg = argv[0];
-    char* wl6FileArg = argv[1];
-
-    FILE* wl6File = openWl6(execPathArg, wl6FileArg);
-
-    if(!wl6File) {
-        printf("Failed to open file %s", wl6FileArg);
-        return EXIT_FAILURE;
-    }
-
-    long wl6Size;
-    char* wl6Data = readWl6(wl6File, &wl6Size);
-
-    char* uncompressedData = deCarmackize(wl6Data, wl6Size);
-
-    free(wl6Data);
-    free(uncompressedData);
-
-    fclose(wl6File);
-
-    return EXIT_SUCCESS;
 }
