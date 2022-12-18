@@ -1,9 +1,12 @@
 project(varg LANGUAGES C)
 
 find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
 
 add_executable(varg src/main.c src/wl6.h src/wl6.c)
 set_property(TARGET varg PROPERTY C_STANDARD 11)
 
-target_link_libraries(varg vargsten ${SDL2_INCLUDE_LIBS})
+if(MSVC)
+    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS /SUBSYSTEM:CONSOLE)
+endif()
+
+target_link_libraries(varg PRIVATE vargsten SDL2::SDL2)

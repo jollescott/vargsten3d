@@ -37,6 +37,7 @@ Thumbs.db
 
 # qtcreator generated files
 *.pro.user*
+CMakeLists.txt.user
 
 # xemacs temporary files
 *.flc
@@ -58,6 +59,9 @@ Thumbs.db
 *.opensdf
 *.vcxproj
 *vcxproj.*
+/CMakeSettings.json
+/out
+/.vs
 
 # MinGW generated files
 *.Debug
@@ -70,5 +74,3 @@ Thumbs.db
 # --------
 *.dll
 *.exe
-
-CMakeLists.txt.user

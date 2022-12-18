@@ -12,7 +12,7 @@ FILE* openWl6(char* execPathArg, char* wl6FileArg)
     char* execPart = strrchr(execPath, '/');
 
     long execLoc = execPart - execPath;
-    char wl6Path[execLoc + strlen(wl6FileArg) + 1];
+    char* wl6Path = malloc(execLoc + strlen(wl6FileArg) + 1);
 
     strncpy(wl6Path, execPath, execLoc);
 
@@ -25,6 +25,7 @@ FILE* openWl6(char* execPathArg, char* wl6FileArg)
     free(wl6Name);
 
     FILE* wl6File = fopen(wl6Path, "rb");
+    free(wl6Path);
 
     return wl6File;
 }
