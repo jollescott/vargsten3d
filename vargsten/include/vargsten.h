@@ -1,10 +1,19 @@
-#ifndef VS3D_H
-#define VS3D_H
+#ifndef VARGSTEN_H
+#define VARGSTEN_H
 
 /**
  * @brief Used to indicate results of operations within vargsten.
  */
 enum VSResult { VSOK, VSFAIL };
+
+/**
+  * @brief used to provide game specific behavior
+  */
+struct Game
+{
+	int(*init)();
+	void(*shutdown)();
+};
 
 /**
  * @brief deCarmackize Decompress data under Carmack compression.
@@ -20,8 +29,8 @@ char* deCarmackize(const char* original, const long size, enum VSResult* result)
  * @param header header byte data.
  * @param level the level to retrieve pointer for.
  * @param result
- * @return the point to the lvel
+ * @return the point to the level
  */
 int mapHeaderPointer(const char* header, const char level, enum VSResult* result);
 
-#endif // VS3D_H
+#endif // VARGSTEN_H

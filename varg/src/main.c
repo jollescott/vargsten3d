@@ -11,6 +11,7 @@
 
 #include "vargsten.h"
 #include "wl6.h"
+#include "wolf.h"
 
 int main(int argc, char* argv)
 {
